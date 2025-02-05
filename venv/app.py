@@ -25,6 +25,11 @@ def proxy_signed():
     endpoint = data.get('endpoint')
     query_string = data.get('queryString')
 
+    # DEBUG: Print extracted fields
+    print("API Key:", user_api_key)
+    print("Endpoint:", endpoint)
+    print("Query String:", query_string)
+
     if not user_api_key or not endpoint or not query_string:
         return jsonify({"error": "Missing fields"}), 400
 
