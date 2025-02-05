@@ -9,7 +9,7 @@ from flask_cors import CORS  # Optional if you want to allow cross-origin
 app = Flask(__name__)
 CORS(app)  # Enable CORS so you can call it from your frontend
 
-BINANCE_BASE_URL = "https://api.binance.com"
+BINANCE_BASE_URL = "https://api.binance.us"
 
 @app.route('/proxySigned', methods=['POST'])
 def proxy_signed():
