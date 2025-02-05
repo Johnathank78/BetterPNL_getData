@@ -7,7 +7,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS  # Optional if you want to allow cross-origin
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}}) # Enable CORS so you can call it from your local "Live Server" front end
+CORS(app) # Enable CORS so you can call it from your local "Live Server" front end
 
 BINANCE_BASE_URL = "https://api.binance.com"
 
