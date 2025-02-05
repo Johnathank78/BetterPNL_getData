@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
 import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS  # Optional if you want to allow cross-origin
@@ -9,6 +10,10 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}}) # Enable CORS so you can call it from your local "Live Server" front end
 
 BINANCE_BASE_URL = "https://api.binance.com"
+
+@app.route('/isRunning', methods=['GET'])
+def test():
+    return jsonify({"message": "API is running!"})
 
 @app.route('/proxySigned', methods=['POST'])
 def proxy_signed():
@@ -39,5 +44,6 @@ def proxy_signed():
         return jsonify({"error": str(e)}), 400
 
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8080))
     app.run(debug=True, host='0.0.0.0', port=8080)
 
