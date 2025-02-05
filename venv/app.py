@@ -37,9 +37,10 @@ def proxy_signed():
 
         if resp.status_code != 200:
             return jsonify({
-                "error": "Binance API returned an error",
+                "error": "Binance API error",
                 "status_code": resp.status_code,
-                "binance_response": binance_response
+                "binance_code": binance_response.get("code", "Unknown"),
+                "binance_message": binance_response.get("msg", "No message provided")
             }), resp.status_code
 
         return jsonify(binance_response)  # Return Binance's JSON response
