@@ -15,6 +15,10 @@ BINANCE_BASE_URL = "https://api.binance.com"
 def test():
     return jsonify({"message": "API is running!"})
 
+@app.route('/returnPOST', methods=['POST'])
+def instantReturn():
+    return request.get_json()
+
 @app.route('/proxySigned', methods=['POST'])
 def proxy_signed():
     data = request.get_json()
@@ -24,11 +28,6 @@ def proxy_signed():
     user_api_key = data.get('apiKey')
     endpoint = data.get('endpoint')
     query_string = data.get('queryString')
-
-    # DEBUG: Print extracted fields
-    print("API Key:", user_api_key)
-    print("Endpoint:", endpoint)
-    print("Query String:", query_string)
 
     if not user_api_key or not endpoint or not query_string:
         return jsonify({"error": "Missing fields"}), 400
