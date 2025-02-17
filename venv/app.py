@@ -49,6 +49,12 @@ def proxy_signed():
         return jsonify({"error": "Request to Binance timed out"}), 504
     except requests.exceptions.RequestException as e:
         return jsonify({"error": "Request error", "details": str(e)}), 400
+    except requests.exceptions.JSONDecodeError:
+        return jsonify({
+            "error": "Binance returned an invalid response",
+            "status_code": resp.status_code,
+            "response_text": resp.text  # Log the raw response for debugging
+        }), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
