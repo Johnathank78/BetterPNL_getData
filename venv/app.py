@@ -55,6 +55,8 @@ def proxy_signed():
             "status_code": resp.status_code,
             "response_text": resp.text  # Log the raw response for debugging
         }), 500
+    except Exception as e:  # Catch-all for any other unexpected errors
+        return jsonify({"error": "An unexpected error occurred", "details": str(e)}), 500
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
